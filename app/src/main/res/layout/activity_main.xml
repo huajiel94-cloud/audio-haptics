@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#12141a"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <!-- ===== 视频 ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1 · 片源"
+            android:textColor="#8b949e"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="6dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pickBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="选视频" />
+
+            <Button
+                android:id="@+id/playBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="播放" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/analysisLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="还没选片源"
+            android:textColor="#8b949e"
+            android:textSize="12sp" />
+
+        <!-- ===== 强度 ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="2 · 实时强度"
+            android:textColor="#8b949e"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/levelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#e6edf3"
+            android:textSize="44sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/levelBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="0" />
+
+        <!-- ===== BLE ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="3 · 蓝牙设备"
+            android:textColor="#8b949e"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/scanBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="扫描设备" />
+
+            <Button
+                android:id="@+id/disconnectBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="断开" />
+
+            <Button
+                android:id="@+id/clearBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="清空日志" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/deviceBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/charBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- ===== 报文 ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="4 · 报文（{level} 会被替换成强度字节）"
+            android:textColor="#8b949e"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/templateEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="AA 03 {level} 55"
+            android:inputType="text"
+            android:textColor="#e6edf3"
+            android:textColorHint="#5a6672"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="强度字节上限（100 或 255）"
+                android:textColor="#8b949e"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/maxByteEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="100"
+                android:textColor="#e6edf3"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/noRespCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="无响应写入（writeNoResponse）"
+            android:textColor="#e6edf3" />
+
+        <TextView
+            android:id="@+id/testLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="手动测试强度：60"
+            android:textColor="#8b949e"
+            android:textSize="12sp" />
+
+        <SeekBar
+            android:id="@+id/testSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="60" />
+
+        <Button
+            android:id="@+id/sendBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="发一帧（手动强度）" />
+
+        <!-- ===== 日志 ===== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="5 · 日志"
+            android:textColor="#8b949e"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/logView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="monospace"
+            android:minHeight="150dp"
+            android:textColor="#a9b4c0"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</ScrollView>
