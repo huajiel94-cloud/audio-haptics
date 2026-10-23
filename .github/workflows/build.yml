@@ -1,0 +1,40 @@
+name: build-apk
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Gradle 8.4
+        run: |
+          curl -sSLo /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.4-bin.zip
+          unzip -q /tmp/gradle.zip -d "$HOME"
+          echo "$HOME/gradle-8.4/bin" >> "$GITHUB_PATH"
+
+      - name: Show versions
+        run: |
+          java -version
+          gradle --version
+
+      - name: Build debug APK
+        run: gradle :app:assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: audio-haptics-debug
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
